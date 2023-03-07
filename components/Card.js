@@ -1,10 +1,16 @@
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import React from "react";
 import Colors from "../contants/colors";
+import { useNavigation } from "@react-navigation/native";
 
-export default function Card({ imageSrc, title, location }) {
+export default function Card({ imageSrc, title, location, data }) {
+  const navigation = useNavigation();
+
   return (
-    <TouchableOpacity style={styles.cardContainer}>
+    <TouchableOpacity
+      style={styles.cardContainer}
+      onPress={() => navigation.navigate("ItemScreen", { param: data })}
+    >
       <Image source={{ uri: imageSrc }} style={styles.image} />
       <Text style={styles.title}>
         {title?.lenght > 14 ? `${title.slice(0, 14)}...` : title}

@@ -79,6 +79,7 @@ export default function Discover() {
             }
             title="Sample 1"
             location="Gdańsk"
+            data={{ title: "Sample 1" }}
           />
           <Card
             key={"102"}
@@ -87,6 +88,7 @@ export default function Discover() {
             }
             title="Sample 2"
             location="Zakopane"
+            data={{ title: "Sample 2" }}
           />
         </View>
       </ScrollView>
