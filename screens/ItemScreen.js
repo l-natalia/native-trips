@@ -36,6 +36,7 @@ export default function ItemScreen({ route }) {
           <View style={styles.actionsTop}>
             <TouchableOpacity
               style={{ ...styles.button, backgroundColor: "white" }}
+              onPress={() => navigation.navigate("Discover")}
             >
               <Entypo
                 name="chevron-left"
@@ -52,6 +53,64 @@ export default function ItemScreen({ route }) {
 
           <View style={styles.priceContainer}>
             <Text style={styles.price}>99$/person</Text>
+          </View>
+        </View>
+        <View style={styles.info}>
+          <Text style={styles.infoName}>Sample 1</Text>
+          <View style={styles.infoLocationContainer}>
+            <Entypo name="location-pin" size={24} color={Colors.fontLight} />
+            <Text style={styles.infoLocation}>Zakopane</Text>
+          </View>
+        </View>
+
+        <View style={styles.stats}>
+          <View style={styles.statContainer}>
+            <View style={styles.iconContainer}>
+              <Entypo name="star" size={18} color="black" />
+            </View>
+            <View>
+              <Text style={styles.statText}>3.4</Text>
+              <Text style={styles.statText}>Ratings</Text>
+            </View>
+          </View>
+          <View style={styles.statContainer}>
+            <View style={styles.iconContainer}>
+              <Entypo name="star" size={18} color="black" />
+            </View>
+            <View>
+              <Text style={styles.statText}>$$$</Text>
+              <Text style={styles.statText}>Price level</Text>
+            </View>
+          </View>
+        </View>
+
+        <Text style={styles.description}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam.
+        </Text>
+
+        <View style={styles.tags}>
+          <TouchableOpacity style={styles.tag}>
+            <Text>lorem</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.tag}>
+            <Text>vege</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.contactContainer}>
+          <View style={styles.contactItem}>
+            <Entypo name="phone" size={18} color={Colors.primaryGrey} />
+            <Text>+48 234-234-967</Text>
+          </View>
+          <View style={styles.contactItem}>
+            <Entypo name="mail" size={22} color={Colors.primaryGrey} />
+            <Text>sample1@mail.com</Text>
+          </View>
+          <View style={styles.contactItem}>
+            <Entypo name="pin" size={22} color={Colors.primaryGrey} />
+            <Text>Krupówki 23, Zakopane</Text>
           </View>
         </View>
       </ScrollView>
@@ -106,5 +165,76 @@ const styles = StyleSheet.create({
   price: {
     fontSize: 18,
     color: "white",
+  },
+  info: {
+    marginTop: 10,
+  },
+  infoName: {
+    color: Colors.fontDark,
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  infoLocationContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 3,
+  },
+  infoLocation: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: Colors.fontLight,
+  },
+  stats: {
+    marginTop: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  statContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    columnGap: 5,
+  },
+  iconContainer: {
+    width: 30,
+    height: 30,
+    borderRadius: 4,
+    backgroundColor: "pink",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  statText: {
+    color: Colors.fontLight,
+    fontSize: 12,
+  },
+  description: {
+    marginTop: 15,
+    fontSize: 14,
+    color: Colors.fontLight,
+  },
+  tags: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    flexWrap: "wrap",
+    marginTop: 10,
+    columnGap: 5,
+  },
+  tag: {
+    paddingHorizontal: 3,
+    borderRadius: 5,
+    backgroundColor: "pink",
+  },
+  contactContainer: {
+    marginTop: 10,
+    backgroundColor: "#ededeb",
+    borderRadius: 5,
+    padding: 5,
+    rowGap: 4,
+  },
+  contactItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    columnGap: 10,
   },
 });

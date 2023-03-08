@@ -15,3 +15,9 @@ import {HeroImage} from "../assets/index";
 
 or:
 <Image source={require("../assets/hero.png")} style={styles.image} />
+
+#icons
+https://icons.expo.fyi/
+
+#design
+https://dribbble.com/shots/15172316-Travel-App-Concept
