@@ -8,21 +8,39 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import React, { useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Avatar, Hotels, Attractions, Restaurants } from "../assets";
 import MenuItem from "../components/MenuItem";
 import Colors from "../contants/colors";
 import Card from "../components/Card";
+import { restaurants, hotels, attractions } from "../contants/places";
 
 export default function Discover() {
   const navigation = useNavigation();
-  const [type, setType] = useState("restaurants");
+  const [category, setCategory] = useState("restaurants");
+  const [currentPlaces, setCurrentPlaces] = useState(restaurants);
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
     });
   }, []);
+
+  useEffect(() => {
+    switch (category) {
+      case "restaurants":
+        setCurrentPlaces(restaurants);
+        break;
+      case "hotels":
+        setCurrentPlaces(hotels);
+        break;
+      case "attractions":
+        setCurrentPlaces(attractions);
+        break;
+      default:
+        setCurrentPlaces(restaurants);
+    }
+  }, [category]);
 
   return (
     <SafeAreaView style={styles.screenContainer}>
@@ -41,24 +59,24 @@ export default function Discover() {
         <View style={styles.menuContainer}>
           <MenuItem
             key="hotel"
-            title="Hotel"
+            title="Hotels"
             imageSrc={Hotels}
-            type={type}
-            setType={setType}
+            category={category}
+            setCategory={setCategory}
           />
           <MenuItem
             key="attraction"
             title="Attractions"
             imageSrc={Attractions}
-            type={type}
-            setType={setType}
+            category={category}
+            setCategory={setCategory}
           />
           <MenuItem
             key="restaurant"
             title="Restaurants"
             imageSrc={Restaurants}
-            type={type}
-            setType={setType}
+            category={category}
+            setCategory={setCategory}
           />
         </View>
 
@@ -72,24 +90,9 @@ export default function Discover() {
         </View>
 
         <View style={styles.listContainer}>
-          <Card
-            key={"101"}
-            imageSrc={
-              "https://cdn.pixabay.com/photo/2017/06/26/12/49/red-wine-2443699_1280.jpg"
-            }
-            title="Sample 1"
-            location="Gdańsk"
-            data={{ title: "Sample 1" }}
-          />
-          <Card
-            key={"102"}
-            imageSrc={
-              "https://cdn.pixabay.com/photo/2015/04/08/13/13/food-712665_1280.jpg"
-            }
-            title="Sample 2"
-            location="Zakopane"
-            data={{ title: "Sample 2" }}
-          />
+          {currentPlaces.map((item) => (
+            <Card key={item.id} data={item} />
+          ))}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -164,6 +167,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-evenly",
-		flexWrap: 'wrap'
+    flexWrap: "wrap",
   },
 });

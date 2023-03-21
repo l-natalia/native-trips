@@ -3,7 +3,6 @@ import {
   Text,
   SafeAreaView,
   StyleSheet,
-  Image,
   TouchableOpacity,
 } from "react-native";
 import React, { useLayoutEffect } from "react";
@@ -11,6 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 import Colors from "../contants/colors";
 import { HeroImage } from "../assets/index";
 import * as Animatable from "react-native-animatable";
+import { StatusBar } from "react-native";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -45,7 +45,6 @@ const HomeScreen = () => {
       <View style={styles.circle2}></View>
 
       <View style={styles.imageContainer}>
-        {/* <Image source={require("../assets/hero.png")} style={styles.image} /> */}
         <Animatable.Image
           source={HeroImage}
           style={styles.image}
@@ -72,7 +71,8 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   appContainer: {
     flex: 1,
-    marginTop: 35,
+		//not sure about this one
+    marginTop: StatusBar.currentHeight,
   },
   lead: {
     flexDirection: "row",
@@ -139,6 +139,7 @@ const styles = StyleSheet.create({
     position: "relative",
     justifyContent: "center",
     alignItems: "center",
+		marginTop: 45,
   },
   image: {
     width: "100%",
@@ -148,20 +149,20 @@ const styles = StyleSheet.create({
   buttonContainer: {
     position: "absolute",
     bottom: 60,
-    width: 56,
-    height: 56,
-    borderLeftWidth: 2,
-    borderTopWidth: 4,
-    borderRightWidth: 2,
+    width: 110,
+    height: 110,
+    borderLeftWidth: 4,
+    borderTopWidth: 6,
+    borderRightWidth: 4,
     borderColor: Colors.primaryTeal,
-    borderRadius: 28,
+    borderRadius: 55,
     alignItems: "center",
     justifyContent: "center",
   },
   textContainer: {
-    width: 46,
-    height: 46,
-    borderRadius: 23,
+    width: 86,
+    height: 86,
+    borderRadius: 43,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: Colors.primaryTeal,

@@ -6,11 +6,13 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  Button,
 } from "react-native";
 import React, { useLayoutEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Entypo } from "@expo/vector-icons";
 import Colors from "../contants/colors";
+import { images } from "../assets";
 
 export default function ItemScreen({ route }) {
   const navigation = useNavigation();
@@ -27,12 +29,7 @@ export default function ItemScreen({ route }) {
     <SafeAreaView style={styles.screenContainer}>
       <ScrollView style={styles.scrollView}>
         <View style={styles.imageContainer}>
-          <Image
-            source={{
-              uri: "https://cdn.pixabay.com/photo/2015/04/08/13/13/food-712665_1280.jpg",
-            }}
-            style={styles.image}
-          />
+          <Image source={images[data.img].uri} style={styles.image} />
           <View style={styles.actionsTop}>
             <TouchableOpacity
               style={{ ...styles.button, backgroundColor: "white" }}
@@ -52,14 +49,14 @@ export default function ItemScreen({ route }) {
           </View>
 
           <View style={styles.priceContainer}>
-            <Text style={styles.price}>99$/person</Text>
+            <Text style={styles.price}>{data.price}$/person</Text>
           </View>
         </View>
         <View style={styles.info}>
-          <Text style={styles.infoName}>Sample 1</Text>
+          <Text style={styles.infoName}>{data.title}</Text>
           <View style={styles.infoLocationContainer}>
             <Entypo name="location-pin" size={24} color={Colors.fontLight} />
-            <Text style={styles.infoLocation}>Zakopane</Text>
+            <Text style={styles.infoLocation}>{data.location}</Text>
           </View>
         </View>
 
@@ -69,34 +66,37 @@ export default function ItemScreen({ route }) {
               <Entypo name="star" size={18} color="black" />
             </View>
             <View>
-              <Text style={styles.statText}>3.4</Text>
-              <Text style={styles.statText}>Ratings</Text>
+              <Text style={styles.statText}>{data.rating}</Text>
+              <Text style={styles.statText}>Rating</Text>
             </View>
           </View>
           <View style={styles.statContainer}>
             <View style={styles.iconContainer}>
-              <Entypo name="star" size={18} color="black" />
+              <Entypo name="price-tag" size={18} color="black" />
             </View>
             <View>
-              <Text style={styles.statText}>$$$</Text>
+              <Text style={styles.statText}>{data.priceLvl}</Text>
               <Text style={styles.statText}>Price level</Text>
+            </View>
+          </View>
+          <View style={styles.statContainer}>
+            <View style={styles.iconContainer}>
+              <Entypo name="calendar" size={18} color="black" />
+            </View>
+            <View>
+              <Text style={styles.statText}>Open now</Text>
             </View>
           </View>
         </View>
 
-        <Text style={styles.description}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam.
-        </Text>
+        <Text style={styles.description}>{data.description}</Text>
 
         <View style={styles.tags}>
-          <TouchableOpacity style={styles.tag}>
-            <Text>lorem</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.tag}>
-            <Text>vege</Text>
-          </TouchableOpacity>
+          {data.tags.map((tag) => (
+            <View style={styles.tag} key={tag}>
+              <Text>{tag}</Text>
+            </View>
+          ))}
         </View>
 
         <View style={styles.contactContainer}>
@@ -112,6 +112,11 @@ export default function ItemScreen({ route }) {
             <Entypo name="pin" size={22} color={Colors.primaryGrey} />
             <Text>Krupówki 23, Zakopane</Text>
           </View>
+          <TouchableOpacity style={styles.bookContainer}>
+            <View style={styles.bookBtn}>
+              <Text style={styles.bookBtnText}>BOOK NOW</Text>
+            </View>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -164,7 +169,10 @@ const styles = StyleSheet.create({
   },
   price: {
     fontSize: 18,
-    color: "white",
+    color: Colors.fontDark,
+    backgroundColor: "rgba(254, 254, 254, 0.6)",
+    paddingHorizontal: 5,
+    borderRadius: 10,
   },
   info: {
     marginTop: 10,
@@ -187,7 +195,7 @@ const styles = StyleSheet.create({
   stats: {
     marginTop: 10,
     flexDirection: "row",
-    justifyContent: "space-between",
+    columnGap: 30,
     alignItems: "center",
   },
   statContainer: {
@@ -199,7 +207,7 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 4,
-    backgroundColor: "pink",
+    backgroundColor: Colors.primaryTeal,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -221,20 +229,37 @@ const styles = StyleSheet.create({
     columnGap: 5,
   },
   tag: {
-    paddingHorizontal: 3,
+    paddingHorizontal: 5,
     borderRadius: 5,
-    backgroundColor: "pink",
+    backgroundColor: Colors.primaryTealLight,
   },
   contactContainer: {
-    marginTop: 10,
+    marginTop: 15,
     backgroundColor: "#ededeb",
     borderRadius: 5,
-    padding: 5,
+    padding: 10,
     rowGap: 4,
   },
   contactItem: {
     flexDirection: "row",
     alignItems: "center",
     columnGap: 10,
+  },
+  bookContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+		marginTop: 10,
+  },
+  bookBtn: {
+    width: 200,
+    backgroundColor: Colors.primaryTeal,
+    paddingVertical: 10,
+		borderRadius: 10,
+  },
+  bookBtnText: {
+    textAlign: "center",
+		color: "white",
+		fontWeight: 'bold',
+		fontSize: 15,
   },
 });

@@ -2,18 +2,18 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import React from "react";
 import Colors from "../contants/colors";
 
-export default function MenuItem({ title, imageSrc, type, setType }) {
+export default function MenuItem({ title, imageSrc, category, setCategory }) {
 
-	const handlePress = () => {
-		setType(title.toLowerCase())
-	}
+  const handlePress = () => {
+    setCategory(title.toLowerCase());
+  };
 
   return (
     <TouchableOpacity style={styles.container} onPress={handlePress}>
       <View
         style={[
           styles.imageContainer,
-          type === title.toLowerCase() && styles.active,
+          category === title.toLowerCase() && styles.active,
         ]}
       >
         <Image source={imageSrc} style={styles.image} />
@@ -30,9 +30,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   imageContainer: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: 76,
+    height: 76,
+    borderRadius: 38,
     backgroundColor: "transparent",
     justifyContent: "center",
     alignItems: "center",
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   text: {
-    color: Colors.primaryTeal,
-    fontSize: 12,
+    color: Colors.fontDark,
+    fontSize: 14,
   },
 });

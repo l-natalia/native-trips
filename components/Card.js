@@ -2,8 +2,9 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import React from "react";
 import Colors from "../contants/colors";
 import { useNavigation } from "@react-navigation/native";
+import { images } from "../assets";
 
-export default function Card({ imageSrc, title, location, data }) {
+export default function Card({ data }) {
   const navigation = useNavigation();
 
   return (
@@ -11,12 +12,15 @@ export default function Card({ imageSrc, title, location, data }) {
       style={styles.cardContainer}
       onPress={() => navigation.navigate("ItemScreen", { param: data })}
     >
-      <Image source={{ uri: imageSrc }} style={styles.image} />
+      <Image
+        source={images[data.img].uri}
+        style={styles.image}
+      />
       <Text style={styles.title}>
-        {title?.lenght > 14 ? `${title.slice(0, 14)}...` : title}
+        {data.title.lenght > 14 ? `${data.title.slice(0, 14)}...` : data.title}
       </Text>
       <Text style={styles.location}>
-        {location?.lenght > 14 ? `${location.slice(0, 14)}...` : location}
+        {data.location.lenght > 14 ? `${data.location.slice(0, 14)}...` : data.location}
       </Text>
     </TouchableOpacity>
   );
